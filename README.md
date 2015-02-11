@@ -7,7 +7,7 @@ Function
 
 Command
 ---------
-python vicData.py -i input_dir -o output_dir_data -prec output_dir_dates_prec -run_base output_dir_dates_run_base
+`python vicData.py -i input_dir -o output_dir_data -prec output_dir_dates_prec -run_base output_dir_dates_run_base`
 
 Parameters
 ---------
