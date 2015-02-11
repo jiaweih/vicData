@@ -1,28 +1,4 @@
 #!/usr/bin/env python
-"""
-Function
----------
-Process VIC output files and generate annual maximum values of precipitation and run_base (runoff + baseflow)
-
-Command
----------
-python vicData.py -i input_dir -o output_dir
-
-Parameters
----------
-input_dir: input directories containing files to be processed (all files will be processed)
-output_idr: output directories to store processed output files
-
-Returns
----------
-Output files contain four columns: year, annuam max prec, annual max run_base, annual mean prec
-
-Examples
----------
-python vicData.py -i example_fluxes -o example_outputs
-Note: if vicData.py is not under the same directory as input_dir and output_dir, absolute 
-	  path of input_dir and output_dir will be required
-"""
 
 import numpy as np
 import pandas as pd
@@ -45,6 +21,11 @@ def main():
 def read_files(in_path,startYear=1915,endYear=2006,startIndex=274,endIndex=33511):
     """
     Read data into DataFrame
+
+    Inputs
+    ---------
+    startYear: starting calendar year
+    endYear: end calendar year
     """
     start = datetime(startYear,10,1)
     end = datetime(endYear,9,30)
@@ -62,6 +43,9 @@ def read_files(in_path,startYear=1915,endYear=2006,startIndex=274,endIndex=33511
     return df
 
 def water_year(in_date):
+    """
+    Given certain date, calculate corresponding water year
+    """
     if in_date.year%4 == 0:
         if in_date.timetuple().tm_yday <= 274:
             return in_date.year 
@@ -74,6 +58,18 @@ def water_year(in_date):
             return in_date.year + 1 
 
 def calculate_data(df,startYear=1916,endYear=2006):
+    """
+    Calculate maximum annual prec, maximum annual run_base, maximum mean precipitation
+
+    Inputs
+    --------
+    startYear: starting water year
+    endYear: end water year
+
+    Outputs
+    --------
+    Arrays containing years, annual maximum prec, annual maximum run_base, annual mean prec
+    """
     years = np.arange(startYear,endYear+1)
     prec_max = df['prec'].groupby(lambda x:water_year(x)).max().values
     prec_mean = df['prec'].groupby(lambda x:water_year(x)).mean().values
@@ -89,6 +85,17 @@ def calculate_dates(df,write_data):
     return dates_prec_max,dates_run_base_max
 
 def get_dates(df,data,var,startYear=1916):
+    """
+    Calculate dates for maximum annual events
+
+    Inputs
+    --------
+    startYear: starting water year
+
+    Output
+    --------
+    Arrays containing year, month, day, annual maximum data
+    """
     dates_max = np.empty([len(data),4])
     for i in np.arange(len(data)):
         index = df[df[var] == data[i]].index  ##There are more than two dates matching maximum annual values in some years 
@@ -99,7 +106,7 @@ def get_dates(df,data,var,startYear=1916):
 
 def write_files_data(write_data,out_dir,filename):
     """
-    Read in annual maximum DataFrames and save values in ascill files
+    Write data
 
     """
     if not os.path.exists(out_dir):
@@ -108,6 +115,9 @@ def write_files_data(write_data,out_dir,filename):
     np.savetxt(out_path,write_data,fmt=('%i','%8.3f','%8.3f','%8.3f'))
 
 def write_files_dates(write_dates,out_dir,filename):
+    """
+    Write dates for annual maximum events
+    """
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
     out_path = os.path.join(out_dir,filename)
