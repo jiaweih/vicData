@@ -25,7 +25,7 @@ Output data files contain four columns: year, annual max prec, annual max run_ba
 
 Output date files contain four columns: year, month, day, maximum annual data
 
-Examples
+Example of usage
 ---------
 `python vicData.py -i example_fluxes -o example_outputs_data -prec example_dates_prec -run_base example_dates_run_base`
 
