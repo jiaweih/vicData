@@ -15,10 +15,8 @@ in_dir: input directory containing the fluxes files for each cell
 
 Outputs
 ----------
-figures: "figures" directory will be created under current directory, figures of fitting distributions 
-for each cell will be generated in pdf format
-estimates: "estimates" directory will be created under current directory, 
-estimates of run_base based on certain return periods for each distribution will be calculated for each cell
+figures: "figures" directory will be created under current directory, figures of fitting distributions for each cell will be generated in pdf format
+estimates: "estimates" directory will be created under current directory, estimates of run_base based on certain return periods for each distribution will be calculated for each cell
 
 Example of usage
 -----------------
