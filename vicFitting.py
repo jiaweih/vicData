@@ -37,7 +37,6 @@ import argparse
 sys.path.append('/Library/Python/2.7/site-packages')
 import lmoments as lm
 
-
 dist_dict = {
 			'parameter':{'PE3':lm.pelpe3,'GUM':lm.pelgum,'GEV':lm.pelgev,'GNO':lm.pelgno},
 			'quantile':{'PE3':lm.quape3,'GUM':lm.quagum,'GEV':lm.quagev,'GNO':lm.quagno},
