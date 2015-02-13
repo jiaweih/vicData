@@ -8,7 +8,10 @@ import argparse
 
 
 def main():
-    in_dir,out_dir_data,out_dir_dates_prec,out_dir_dates_runbase = command_lines()
+    in_dir = command_lines()
+    out_dir_data = 'example_outputs_data'
+    out_dir_dates_prec = 'example_dates_prec'
+    out_dir_dates_runbase = 'example_dates_run_base'
     for filename in os.listdir(in_dir):
     	in_path = os.path.join(in_dir,filename)
         df = read_files(in_path)
@@ -129,20 +132,21 @@ def command_lines():
                         type=str,
                         help="Input directory",
                         required=True)
-    parser.add_argument("-o", "--output_dir_data",
-                        type=str,
-                        help="Output data directory",
-                        required=True)
-    parser.add_argument("-prec", "--output_dir_dates_prec",
-                        type=str,
-                        help="Output dates directory for maximum annual precipitation",
-                        required=True)
-    parser.add_argument("-run_base", "--output_dir_dates_run_base",
-                        type=str,
-                        help="Output dates directory for maximum annual run_base",
-                        required=True)
+    # parser.add_argument("-o", "--output_dir_data",
+    #                     type=str,
+    #                     help="Output data directory",
+    #                     required=True)
+    # parser.add_argument("-prec", "--output_dir_dates_prec",
+    #                     type=str,
+    #                     help="Output dates directory for maximum annual precipitation",
+    #                     required=True)
+    # parser.add_argument("-run_base", "--output_dir_dates_run_base",
+    #                     type=str,
+    #                     help="Output dates directory for maximum annual run_base",
+    #                     required=True)
     args = parser.parse_args()
-    return args.input_dir,args.output_dir_data,args.output_dir_dates_prec,args.output_dir_dates_run_base
-
+    # return args.input_dir,args.output_dir_data,args.output_dir_dates_prec,args.output_dir_dates_run_base
+    return args.input_dir
+    
 if __name__ == "__main__":
 	main()
