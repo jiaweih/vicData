@@ -1,28 +1,4 @@
 #!/usr/bin/env python
-"""
-Function
-----------
-Fit distributions to annual maximum run_base (runoff + baseflow) based on L-moments; four distributions are considered: PE3, GUM, GEV, GNO
-Calculate estimates of annual maximum run_base based on certain return_periods
-
-Command 
-----------
-python vicFitting.py -i in_dir
-
-Inputs
-----------
-in_dir: input directory containing the fluxes files for each cell
-
-Outputs
-----------
-figures: "figures" directory will be created under current directory, figures of fitting distributions for each cell will be generated in pdf format
-estimates: "estimates" directory will be created under current directory, estimates of run_base based on certain return periods for each distribution will be calculated for each cell
-
-Example of usage
------------------
-python vicFitting.py -i example_fluxes
-
-"""
 
 import numpy as np
 import pandas as pd
